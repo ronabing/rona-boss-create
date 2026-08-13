@@ -1,8 +1,11 @@
 import os
 import discord
+from dotenv import load_dotenv
 from discord.ext import commands, tasks
 from datetime import datetime, time
 from zoneinfo import ZoneInfo
+
+load_dotenv()
 
 # 1. 한국 시간대(KST) 및 권한 설정
 KST = ZoneInfo("Asia/Seoul")
