@@ -18,13 +18,13 @@ intents.guilds = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # ⚙️ 채널 ID 설정 (본인의 실제 디스코드 채널 ID 숫자로 수정 필수!)
-RAID_CHANNEL_ID = 1527960518890098799    # 시간대별 레이드 채널 ID
-SPECIAL_CHANNEL_ID = 1537293087464755300 # 마발(시간협의) 채널 ID
+RAID_CHANNEL_ID = 1528345421548752957    # 시간대별 레이드 채널 ID
+SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 
 TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00", "24:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
-@tasks.loop(time=time(hour=7, minute=33, second=0, tzinfo=KST))
+@tasks.loop(time=time(hour=7, minute=40, second=0, tzinfo=KST))
 async def daily_raid_setup():
     today = datetime.now(KST).strftime("%Y-%m-%d")
     
@@ -33,9 +33,9 @@ async def daily_raid_setup():
     if raid_channel:
         print("🧹 일반 레이드 채널 스레드 청소 중...")
         for thread in raid_channel.threads:
-            await thread.delete()
+      #      await thread.delete()
         async for thread in raid_channel.archived_threads(limit=50):
-            await thread.delete()
+    #       await thread.delete()
 
         if isinstance(raid_channel, discord.ForumChannel):
             for slot in TIME_SLOTS:
