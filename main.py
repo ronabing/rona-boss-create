@@ -24,7 +24,7 @@ SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00", "24:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
-@tasks.loop(time=time(hour=7, minute=0, second=0, tzinfo=KST))
+@tasks.loop(time=time(hour=14, minute=12, second=0, tzinfo=KST))
 async def daily_raid_setup():
     today = datetime.now(KST).strftime("%Y-%m-%d")
     
