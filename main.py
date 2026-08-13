@@ -23,7 +23,7 @@ SPECIAL_CHANNEL_ID = 1537293087464755300 # 마발(시간협의) 채널 ID
 TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00", "24:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
-@tasks.loop(time=time(hour=13, minute=36, second=0, tzinfo=KST))
+@tasks.loop(time=time(hour=13, minute=42, second=0, tzinfo=KST))
 async def daily_raid_setup():
     today = datetime.now(KST).strftime("%Y-%m-%d")
     
@@ -39,15 +39,15 @@ async def daily_raid_setup():
         if isinstance(raid_channel, discord.ForumChannel):
             for slot in TIME_SLOTS:
                 await raid_channel.create_thread(
-                    name=f"[{slot}] 레이드",
+                    name=f"[{today}] {slot} 혼테일",
                     content="직업을 적어주세요",
                     auto_archive_duration=1440
                 )
         else:
             for slot in TIME_SLOTS:
-                msg = await raid_channel.send(f"📌 **[{slot}] 레이드**\n직업을 적어주세요")
+                msg = await raid_channel.send(f"📌 **[{slot}] 혼테일**\n직업을 적어주세요")
                 await msg.create_thread(
-                    name=f"[{slot}] 레이드",
+                    name=f"[{today}] {slot} 혼테일",
                     auto_archive_duration=1440
                 )
             
