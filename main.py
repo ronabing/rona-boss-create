@@ -18,13 +18,13 @@ intents.guilds = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # ⚙️ 채널 ID 설정 (본인의 실제 디스코드 채널 ID 숫자로 수정 필수!)
-RAID_CHANNEL_ID = 1527960518890098799    # 시간대별 레이드 채널 ID
-SPECIAL_CHANNEL_ID = 1537293087464755300 # 마발(시간협의) 채널 ID
+RAID_CHANNEL_ID = 1528345421548752957    # 시간대별 레이드 채널 ID
+SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 
 TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00", "24:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
-@tasks.loop(time=time(hour=7, minute=22, second=0, tzinfo=KST))
+@tasks.loop(time=time(hour=7, minute=28, second=0, tzinfo=KST))
 async def daily_raid_setup():
     today = datetime.now(KST).strftime("%Y-%m-%d")
     
