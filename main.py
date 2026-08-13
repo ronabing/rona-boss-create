@@ -5,6 +5,7 @@ from discord.ext import commands, tasks
 from datetime import datetime, time
 from zoneinfo import ZoneInfo
 
+# 개발자 센터 코드에서 봇 토큰 받아오기
 load_dotenv()
 
 # 1. 한국 시간대(KST) 및 권한 설정
