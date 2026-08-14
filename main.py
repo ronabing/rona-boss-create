@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 RAID_CHANNEL_ID = 1528345421548752957    # 시간대별 레이드 채널 ID
 SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 
-TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00", "24:00"]
+TIME_SLOTS = ["20:00", "21:00", "22:00", "23:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
 @tasks.loop(time=time(hour=7, minute=0, second=0, tzinfo=KST))
@@ -52,7 +52,7 @@ async def daily_raid_setup():
                     auto_archive_duration=1440
                 )
             
-        print(f"✅ 일반 레이드 스레드 5개 생성 완료 ({today})")
+        print(f"✅ 일반 레이드 스레드 {len(TIME_SLOTS)}개 생성 완료 ({today})")
 
     # [작업 2] 마발(시간협의) 채널 스레드 관리
     special_channel = bot.get_channel(SPECIAL_CHANNEL_ID)
@@ -65,18 +65,18 @@ async def daily_raid_setup():
 
         if isinstance(special_channel, discord.ForumChannel):
             await special_channel.create_thread(
-                name=f"[{today}] 마발(시간협의)",
+                name=f"[{today}] 마발 23시 이후",
                 content="직업을 적어주세요",
                 auto_archive_duration=1440
             )
         else:
-            msg = await special_channel.send(f"📌 **[{today}] 마발(시간협의)**\n직업을 적어주세요")
+            msg = await special_channel.send(f"📌 **[{today}] 마발 23시 이후**\n직업을 적어주세요")
             await msg.create_thread(
-                name=f"[{today}] 마발(시간협의)",
+                name=f"[{today}] 마발 23시 이후",
                 auto_archive_duration=1440
             )
             
-        print(f"✅ 마발(시간협의) 스레드 생성 완료 ({today})")
+        print(f"✅ 23시 이후 마발 스레드 생성 완료 ({today})")
 
 @bot.event
 async def on_ready():
