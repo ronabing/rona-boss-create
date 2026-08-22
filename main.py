@@ -40,15 +40,15 @@ async def daily_raid_setup():
         if isinstance(raid_channel, discord.ForumChannel):
             for slot in TIME_SLOTS:
                 await raid_channel.create_thread(
-                    name=f"[{today}] {slot} 혼테일",
+                    name=f"[{today}] [혼테일] {slot}",
                     content="직업을 적어주세요",
                     auto_archive_duration=1440
                 )
         else:
             for slot in TIME_SLOTS:
-                msg = await raid_channel.send(f"📌 **[{slot}] 혼테일**\n직업을 적어주세요")
+                msg = await raid_channel.send(f"📌 **혼테일 [{slot}]**\n직업을 적어주세요")
                 await msg.create_thread(
-                    name=f"[{today}] {slot} 혼테일",
+                    name=f"[{today}] [혼테일] {slot}",
                     auto_archive_duration=1440
                 )
             
@@ -66,7 +66,7 @@ async def daily_raid_setup():
         if isinstance(special_channel, discord.ForumChannel):
             # 1. 기존 마발 스레드 생성
             await special_channel.create_thread(
-                name=f"[{today}] 23시 이후 마발",
+                name=f"[{today}] [마왕 발록] 23시 이후",
                 content="직업을 적어주세요",
                 auto_archive_duration=1440
             )
@@ -80,7 +80,7 @@ async def daily_raid_setup():
             # 1. 기존 마발 스레드 생성
             msg1 = await special_channel.send(f"📌 **[{today}] 23시 이후 마발**\n직업을 적어주세요")
             await msg1.create_thread(
-                name=f"[{today}] 23시 이후 마발",
+                name=f"[{today}] [마왕 발록] 23시 이후",
                 auto_archive_duration=1440
             )
             # 2. 신규 카오스 자쿰 스레드 생성
