@@ -64,19 +64,33 @@ async def daily_raid_setup():
             await thread.delete()
 
         if isinstance(special_channel, discord.ForumChannel):
+            # 1. 기존 마발 스레드 생성
             await special_channel.create_thread(
-                name=f"[{today}] 마발 23시 이후",
+                name=f"[{today}] 23시 이후 마발",
                 content="직업을 적어주세요",
                 auto_archive_duration=1440
             )
+            # 2. 신규 카오스 자쿰 스레드 생성
+            await special_channel.create_thread(
+                name=f"[{today}] [카오스 자쿰] 시간 협의",
+                content="직업, 스공, 지참할 버프 캐릭을 작성 해주세요",
+                auto_archive_duration=1440
+            )
         else:
-            msg = await special_channel.send(f"📌 **[{today}] 마발 23시 이후**\n직업을 적어주세요")
-            await msg.create_thread(
-                name=f"[{today}] 마발 23시 이후",
+            # 1. 기존 마발 스레드 생성
+            msg1 = await special_channel.send(f"📌 **[{today}] 23시 이후 마발**\n직업을 적어주세요")
+            await msg1.create_thread(
+                name=f"[{today}] 23시 이후 마발",
+                auto_archive_duration=1440
+            )
+            # 2. 신규 카오스 자쿰 스레드 생성
+            msg2 = await special_channel.send(f"📌 **[{today}] [카오스 자쿰] 시간 협의**\n직업, 스공, 지참할 버프 캐릭을 작성 해주세요")
+            await msg2.create_thread(
+                name=f"[{today}] [카오스 자쿰] 시간 협의",
                 auto_archive_duration=1440
             )
             
-        print(f"✅ 23시 이후 마발 스레드 생성 완료 ({today})")
+        print(f"✅ 마발 및 카오스 자쿰 스레드 생성 완료 ({today})")
 
 @bot.event
 async def on_ready():
