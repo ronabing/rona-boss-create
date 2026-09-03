@@ -87,6 +87,7 @@ async def daily_raid_setup():
                 name=f"[{today}] [심연의 혼테일] 시간 협의",
                 content="직업과 스공, 보맥을 적어주세요.",
                 auto_archive_duration=1440
+            )
         else:
             # 1. 기존 마발 스레드 생성
             msg1 = await special_channel.send(f"📌 **[{today}] 23시 이후 마발**\n직업을 적어주세요")
