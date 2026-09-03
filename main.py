@@ -76,6 +76,17 @@ async def daily_raid_setup():
                 content="직업, 스공, 지참할 버프 캐릭을 작성 해주세요",
                 auto_archive_duration=1440
             )
+            # 3. 심연의 자쿰 (신규)
+            await special_channel.create_thread(
+                name=f"[{today}] [심연의 자쿰] 시간 협의",
+                content="직업과 스공, 보맥을 적어주세요.",
+                auto_archive_duration=1440
+            )
+            # 4. 심연의 혼테일 (신규)
+            await special_channel.create_thread(
+                name=f"[{today}] [심연의 혼테일] 시간 협의",
+                content="직업과 스공, 보맥을 적어주세요.",
+                auto_archive_duration=1440
         else:
             # 1. 기존 마발 스레드 생성
             msg1 = await special_channel.send(f"📌 **[{today}] 23시 이후 마발**\n직업을 적어주세요")
@@ -83,14 +94,26 @@ async def daily_raid_setup():
                 name=f"[{today}] [마왕 발록] 23시 이후",
                 auto_archive_duration=1440
             )
-            # 2. 신규 카오스 자쿰 스레드 생성
+            # 2. 카오스 자쿰 스레드 생성
             msg2 = await special_channel.send(f"📌 **[{today}] [카오스 자쿰] 시간 협의**\n직업, 스공, 지참할 버프 캐릭을 작성 해주세요")
             await msg2.create_thread(
                 name=f"[{today}] [카오스 자쿰] 시간 협의",
                 auto_archive_duration=1440
             )
+            # 3. 심연의 자쿰 (신규)
+            msg3 = await special_channel.send(f"📌 **[{today}] [심연의 자쿰] 시간 협의**\n직업과 스공, 보맥을 적어주세요.")
+            await msg3.create_thread(
+                name=f"[{today}] [심연의 자쿰] 시간 협의",
+                auto_archive_duration=1440
+            )
+            # 4. 심연의 혼테일 (신규)
+            msg4 = await special_channel.send(f"📌 **[{today}] [심연의 혼테일] 시간 협의**\n직업과 스공, 보맥을 적어주세요.")
+            await msg4.create_thread(
+                name=f"[{today}] [심연의 혼테일] 시간 협의",
+                auto_archive_duration=1440
+            )
             
-        print(f"✅ 마발 및 카오스 자쿰 스레드 생성 완료 ({today})")
+        print(f"✅ 상위보스 스레드 4개 생성 완료 ({today})")
 
 @bot.event
 async def on_ready():
