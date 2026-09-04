@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 RAID_CHANNEL_ID = 1528345421548752957    # 시간대별 레이드 채널 ID
 SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 
-TIME_SLOTS = ["21:00", "22:00", "23:00"]
+TIME_SLOTS = ["22:00", "23:00"]
 
 # 2. 매일 한국 시간 오전 07:00 실행
 @tasks.loop(time=time(hour=7, minute=0, second=0, tzinfo=KST))
@@ -70,9 +70,9 @@ async def daily_raid_setup():
                 content="직업을 적어주세요",
                 auto_archive_duration=1440
             )
-            # 2. 신규 카오스 자쿰 스레드 생성
+            # 2. 핑크빈 스레드 생성
             await special_channel.create_thread(
-                name=f"[{today}] [카오스 자쿰] 시간 협의",
+                name=f"[{today}] [핑크빈] 시간 협의",
                 content="직업, 스공, 지참할 버프 캐릭을 작성 해주세요",
                 auto_archive_duration=1440
             )
@@ -95,10 +95,10 @@ async def daily_raid_setup():
                 name=f"[{today}] [마왕 발록] 23시 이후",
                 auto_archive_duration=1440
             )
-            # 2. 카오스 자쿰 스레드 생성
-            msg2 = await special_channel.send(f"📌 **[{today}] [카오스 자쿰] 시간 협의**\n직업, 스공, 지참할 버프 캐릭을 작성 해주세요")
+            # 2. 핑크빈 스레드 생성
+            msg2 = await special_channel.send(f"📌 **[{today}] [핑크빈] 시간 협의**\n직업, 스공, 지참할 버프 캐릭을 작성 해주세요")
             await msg2.create_thread(
-                name=f"[{today}] [카오스 자쿰] 시간 협의",
+                name=f"[{today}] [핑크빈] 시간 협의",
                 auto_archive_duration=1440
             )
             # 3. 심연의 자쿰 (신규)
