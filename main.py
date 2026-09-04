@@ -77,11 +77,12 @@ async def daily_raid_setup():
                 auto_archive_duration=1440
             )
             # 3. 심연의 자쿰 (신규)
-            await special_channel.create_thread(
-                name=f"[{today}] [심연의 자쿰] 시간 협의",
-                content="직업과 스공, 보맥을 적어주세요.",
-                auto_archive_duration=1440
-            )
+           for i in range(1, 5):
+                await special_channel.create_thread(
+                    name=f"[{today}] [심연의 자쿰] {i}파티 시간 협의",
+                    content="직업과 스공, 보맥을 적어주세요.",
+                    auto_archive_duration=1440
+                )
             # 4. 심연의 혼테일 (신규)
             await special_channel.create_thread(
                 name=f"[{today}] [심연의 혼테일] 시간 협의",
@@ -102,11 +103,9 @@ async def daily_raid_setup():
                 auto_archive_duration=1440
             )
             # 3. 심연의 자쿰 (신규)
-            msg3 = await special_channel.send(f"📌 **[{today}] [심연의 자쿰] 시간 협의**\n직업과 스공, 보맥을 적어주세요.")
-            await msg3.create_thread(
-                name=f"[{today}] [심연의 자쿰] 시간 협의",
-                auto_archive_duration=1440
-            )
+            for i in range(1, 5):
+                msg3 = await special_channel.send(f"📌 **[{today}] [심연의 자쿰] {i}파티 시간 협의**\n직업과 스공, 보맥을 적어주세요.")
+                await msg3.create_thread(name=f"[{today}] [심연의 자쿰] {i}파티 시간 협의", auto_archive_duration=1440)
             # 4. 심연의 혼테일 (신규)
             msg4 = await special_channel.send(f"📌 **[{today}] [심연의 혼테일] 시간 협의**\n직업과 스공, 보맥을 적어주세요.")
             await msg4.create_thread(
