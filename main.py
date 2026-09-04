@@ -77,7 +77,7 @@ async def daily_raid_setup():
                 auto_archive_duration=1440
             )
             # 3. 심연의 자쿰 (신규)
-           for i in range(1, 5):
+            for i in range(1, 5):
                 await special_channel.create_thread(
                     name=f"[{today}] [심연의 자쿰] {i}파티 시간 협의",
                     content="직업과 스공, 보맥을 적어주세요.",
