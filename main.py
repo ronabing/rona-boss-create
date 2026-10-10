@@ -21,38 +21,41 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 RAID_CHANNEL_ID = 1528345421548752957    # 시간대별 레이드 채널 ID
 SPECIAL_CHANNEL_ID = 1528346781048635393 # 마발(시간협의) 채널 ID
 
+DAYS_KR = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+
 TIME_SLOTS = ["22:00", "23:00"]
 
-# 2. 매일 한국 시간 오전 07:00 실행
-@tasks.loop(time=time(hour=7, minute=0, second=0, tzinfo=KST))
+# 2. 매일 한국 시간 오전 04:00 실행
+@tasks.loop(time=time(hour=4, minute=0, second=0, tzinfo=KST))
 async def daily_raid_setup():
     today = datetime.now(KST).strftime("%Y-%m-%d")
     
     # [작업 1] 일반 레이드 채널 스레드 관리
     raid_channel = bot.get_channel(RAID_CHANNEL_ID)
     if raid_channel:
-        print("🧹 일반 레이드 채널 스레드 청소 중...")
+        print("🧹 레이드 채널 스레드 청소 중...")
         for thread in raid_channel.threads:
             await thread.delete()
         async for thread in raid_channel.archived_threads(limit=50):
             await thread.delete()
 
+        thread_name = f"[{today}] [{weekday}] [혼테일] 10~24시"
+        thread_content = "오전 10시 ~ 오후 24시, 직업/가능한 시간대 작성 해주세요."
+
         if isinstance(raid_channel, discord.ForumChannel):
-            for slot in TIME_SLOTS:
-                await raid_channel.create_thread(
-                    name=f"[{today}] [혼테일] {slot}",
-                    content="직업을 적어주세요",
-                    auto_archive_duration=1440
-                )
+            await raid_channel.create_thread(
+                name=thread_name,
+                content=thread_content,
+                auto_archive_duration=1440
+            )
         else:
-            for slot in TIME_SLOTS:
-                msg = await raid_channel.send(f"📌 **혼테일 [{slot}]**\n직업을 적어주세요")
-                await msg.create_thread(
-                    name=f"[{today}] [혼테일] {slot}",
-                    auto_archive_duration=1440
-                )
+            msg = await raid_channel.send(f"📌 **{thread_name}**\n{thread_content}")
+            await msg.create_thread(
+                name=thread_name,
+                auto_archive_duration=1440
+            )
             
-        print(f"✅ 일반 레이드 스레드 {len(TIME_SLOTS)}개 생성 완료 ({today})")
+        print(f"✅ 혼테일 스레드 생성 완료 ({today} {weekday})")
 
     # [작업 2] 마발(시간협의) 채널 스레드 관리
     #special_channel = bot.get_channel(SPECIAL_CHANNEL_ID)
